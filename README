@@ -1,0 +1,63 @@
+# C Minus Compiler Project - Milestone 3
+
+## Authors
+- Alireza Sharif
+- Pedram Mirmiran
+
+## Acknowledgements
+We would like to thank Professor Fei Song for the foundational code provided, which has been instrumental in the development of our compiler.
+
+## Overview
+This milestone enhances the C minus language compiler by integrating JFlex and CUP for intermediate TM (Tiny Machine) code generation, in addition to the existing abstract syntax tree and semantic tree generation functionalities.
+
+## Build Instructions
+### Compiling the Compiler
+Execute make in the project root directory to compile the parser.
+
+### Running the Compiler
+To compile a .cm file, use:
+java -classpath ./java-cup-bin/java-cup-11b.jar:. CM fac.cm
+Replace fac.cm with your specific test file.
+
+### Displaying the Syntax Tree
+Use the following command to view the abstract syntax tree:
+java -classpath ./java-cup-bin/java-cup-11b.jar:. CM fac.cm -a
+This will create fac.abs output file.
+
+### Displaying the Semantic Tree
+For the semantic tree:
+java -classpath ./java-cup-bin/java-cup-11b.jar:. CM fac.cm -s
+This will create fac.sym output file.
+
+### Displaying the TM Code
+To generate the intermediate TM code:
+java -classpath ./java-cup-bin/java-cup-11b.jar:. CM fac.cm -c
+
+### Running the TM Code
+Compile the TM simulator with your build tools and then run:
+./tm file.tm
+Use 'g' command to execute the code.
+
+### Testing the Scanner Independently
+For independent scanner testing:
+java -classpath ./java-cup-bin/java-cup-11b.jar:. Scanner < fac.cm
+
+
+Note: The cup.jar file is provided within the project directory for convenience. Ensure you adjust the JFlex path in the makefile according to your system setup.
+
+### Rebuilding the Parser
+Run make clean followed by make to rebuild the parser from scratch.
+
+## Testing Guidelines
+### Abstract Syntax Tree
+Test the scanner, parser, and syntax tree generation with gcd.cm, sort.cm, and fac.cm. Validate the accuracy and exhaustiveness of the token generation.
+
+### Semantic Tree
+Utilize 1.cm through 5.cm to confirm correct error handling and tree construction. Test various semantic error scenarios including misuse of void types, improper array operations, and invalid variable redeclarations.
+
+### TM Code
+Test 1.cm through 9.cm to ensure the compiler outputs valid TM code. Verify the functionality of the TM simulator by running fac.cm and gcd.cm.
+
+## Limitations
+The compiler's error detection is not exhaustive. Known issues include missed semicolons and brackets detection.
+
